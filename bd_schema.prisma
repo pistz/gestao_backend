@@ -1,0 +1,45 @@
+// schema.prisma
+
+// Definição da tabela 'Turma'
+model Turma {
+  id           String       @id @default(uuid())
+  nome         String
+  anoInicio    Int
+  alunos       Aluno[]
+  createdAt    DateTime     @default(now())
+  modifiedAt   DateTime     @updatedAt
+}
+
+// Definição da tabela 'Aluno'
+model Aluno {
+  id           String       @id @default(uuid())
+  nome         String
+  email        String       @unique
+  presencas    ListaPresenca[]
+  turma        Turma        @relation(fields: [turmaId], references: [id])
+  turmaId      String
+  createdAt    DateTime     @default(now())
+  modifiedAt   DateTime     @updatedAt
+}
+
+// Definição da tabela 'ListaPresenca'
+model ListaPresenca {
+  id           String       @id @default(uuid())
+  dataPresenca DateTime
+  presente     Boolean
+  aluno        Aluno        @relation(fields: [alunoId], references: [id])
+  alunoId      String
+  createdAt    DateTime     @default(now())
+  modifiedAt   DateTime     @updatedAt
+}
+
+// Definição da tabela 'Usuario'
+model Usuario {
+  id           String       @id @default(uuid())
+  nome         String
+  email        String       @unique
+  senha        String
+  role         String       // Pode ser 'admin' ou 'usuario'
+  createdAt    DateTime     @default(now())
+  modifiedAt   DateTime     @updatedAt
+}
