@@ -71,8 +71,8 @@ model School {
   users             User[]
   students          Students[]
   courses           Course[]
-  createdAt         DateTime
-  modifiedAt        DateTime
+  createdAt         DateTime     @default(now())
+  modifiedAt        DateTime     @updatedAt
 }
 
 enum Role {
