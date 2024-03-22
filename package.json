@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "start": "node ./bin/index.js",
-    "dev": " tsx ./src/index.ts",
+    "dev": " ts-node-dev ./src/index.ts",
     "test": "jest ./src"
   },
   "author": "Felipe Garcia Marcal",
@@ -16,12 +16,13 @@
     "typescript": "^5.4.3"
   },
   "dependencies": {
+    "@fastify/cors": "^9.0.1",
     "@prisma/client": "^5.11.0",
-    "@types/cors": "^2.8.17",
-    "@types/express": "^4.17.21",
-    "cors": "^2.8.5",
-    "express": "^4.19.1",
+    "fastify": "^4.26.2",
     "prisma": "^5.11.0",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
+    "tsup": "^8.0.2",
     "tsx": "^4.7.1"
   }
 }
