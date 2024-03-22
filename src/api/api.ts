@@ -13,13 +13,10 @@ const api = Fastify();
 api.register(cors, options);
 
 //TODO- rotas
-api.get("/", async (_request, reply)=>{
-    return reply.send({message:"gestao de frequencia online"});
-});
 api.get("/api/v1", (_request, reply)=> reply.send("API Gestao de Frequencia Online"));
 
 api.register(userRoutes, {
-    prefix:'/users',
+    prefix:'api/v1/users',
 });
 
 
