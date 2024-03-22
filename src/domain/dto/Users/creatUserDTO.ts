@@ -5,6 +5,6 @@ export interface createUserDTO {
     userLastName:string,
     email:string,
     password:string,
-    school:string,
+    schoolId:string,
     role:Role,
 }

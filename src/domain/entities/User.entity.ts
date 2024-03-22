@@ -9,4 +9,6 @@ export interface User {
     password:string,
     school:School,
     role:Role,
+    createdAt?:Date,
+    modifiedAt?:Date
 }
