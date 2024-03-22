@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "description": "Projeto Integrador I",
   "main": "index.js",
+  "engines": {
+    "node":"18"
+  },
   "scripts": {
-    "build": "tsc",
+    "build": "tsup src",
     "start": "node ./bin/index.js",
     "dev": " ts-node-dev ./src/index.ts",
     "test": "jest ./src"
