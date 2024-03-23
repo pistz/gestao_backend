@@ -1,7 +1,7 @@
 import { createSchoolDTO } from "../domain/dto/Schools/createSchoolDTO";
 import { School } from "../domain/entities/School.entity";
 import { ISchoolRepository } from "../domain/interfaces/repositories/ISchool";
-import { prisma } from "../prismaClient/PrismaClient";
+import { prisma } from "../utils/prismaClient/PrismaClient";
 
 export class SchoolRepository implements ISchoolRepository{
     get(id: string): Promise<void | null> {

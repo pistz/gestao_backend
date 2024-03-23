@@ -2,7 +2,7 @@ import { createUserDTO } from "../domain/dto/Users/createUserDTO";
 import { User } from "../domain/entities/User.entity";
 import { Role } from "../domain/entities/valueObjects/Role";
 import { IUserRepository } from "../domain/interfaces/repositories/IUser";
-import { prisma } from "../prismaClient/PrismaClient";
+import { prisma } from "../utils/prismaClient/PrismaClient";
 import {User as UserPrisma, Role as RolePrisma} from '@prisma/client'
 
 export class UserRepository implements IUserRepository {
