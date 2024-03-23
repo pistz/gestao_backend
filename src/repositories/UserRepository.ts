@@ -1,20 +1,64 @@
 import { createUserDTO } from "../domain/dto/Users/createUserDTO";
+import { updateUserDTO } from "../domain/dto/Users/updateUserDTO";
 import { User } from "../domain/entities/User.entity";
 import { Role } from "../domain/entities/valueObjects/Role";
-import { IUserRepository } from "../domain/interfaces/repositories/IUser";
+import { IUserRepository } from "../domain/interfaces/repositories/IUserRepository";
 import { prisma } from "../utils/prismaClient/PrismaClient";
 import {User as UserPrisma, Role as RolePrisma} from '@prisma/client'
 
 export class UserRepository implements IUserRepository {
-    get(id: string): Promise<void | null> {
-        throw new Error("Method not implemented.");
+
+    async loginUser(email:string, password:string): Promise<boolean> {
+        const result = await prisma.user.findUniqueOrThrow({
+            where:{
+                email:email,
+                password:password
+            }
+        })
+
+        await prisma.$disconnect();
+        return result ? true : false;
     }
-    getByEmail(email: string): Promise<User | null> {
-        throw new Error("Method not implemented.");
+
+    async get(id: string): Promise<User> {
+        const result = await prisma.user.findUniqueOrThrow({
+            where:{
+                id
+            }
+        })
+        await prisma.$disconnect();
+        return <User>{id:result.id, userFirstName:result.userFirstName, userLastName:result.userLastName, email:result.email, role:result.role};
     }
+
+    async getByEmail(email: string): Promise<User> {
+        const result = await prisma.user.findUniqueOrThrow({
+            where:{
+                email
+            }
+        })
+        await prisma.$disconnect();
+        return <User>{id:result.id, userFirstName:result.userFirstName, userLastName:result.userLastName, email:result.email, role:result.role, password:result.password};
+    }
+
     async getAll(): Promise<User[]> {
+        const result = await prisma.user.findMany()
+        await prisma.$disconnect();
+
+        return result.map((u) => <User>{id:u.id, userFirstName:u.userFirstName, userLastName:u.userLastName, email:u.email, role:u.role});
+    }
+
+    updateUser(user: updateUserDTO): Promise<void> {
         throw new Error("Method not implemented.");
     }
+
+    async deleteUser(userId: string): Promise<void> {
+        await prisma.user.delete({
+            where:{
+                id:userId
+            }
+        }) 
+    }
+
     async createUser(createUser: createUserDTO): Promise<User> {
         const result = await prisma.user.create({
             data:{

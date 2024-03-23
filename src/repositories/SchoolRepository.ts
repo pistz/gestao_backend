@@ -1,6 +1,6 @@
 import { createSchoolDTO } from "../domain/dto/Schools/createSchoolDTO";
 import { School } from "../domain/entities/School.entity";
-import { ISchoolRepository } from "../domain/interfaces/repositories/ISchool";
+import { ISchoolRepository } from "../domain/interfaces/repositories/ISchoolRepository";
 import { prisma } from "../utils/prismaClient/PrismaClient";
 
 export class SchoolRepository implements ISchoolRepository{
