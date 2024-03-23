@@ -11,5 +11,13 @@ export class CreateUserValidation extends Validator<createUserDTO>{
             .notNull()
             .withMessage("e-mail não pode ser nulo")
             .emailAddress()
+        
+        this.ruleFor('password')
+            .notEmpty()
+            .withMessage('password não pode ser vazio')
+            .minLength(5)
+            .withMessage('Deve possuir no mínimo 5 caracteres')
+            .notNull()
+            .withMessage('password não pode ser nulo')
     }
 }
