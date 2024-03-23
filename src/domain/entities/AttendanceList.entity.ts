@@ -1,8 +1,5 @@
-import { Student } from "./Student.entity";
+import { AttendanceList as AttendanceListPrisma } from "@prisma/client";
 
-export interface AttendanceList{
-    id:string,
-    attendanceDate:Date,
-    isPresent:boolean,
-    students:Student[],
+export interface AttendanceList extends AttendanceListPrisma{
+
 }

@@ -1,10 +1,4 @@
-import { School } from "./School.entity";
-import { Student } from "./Student.entity";
+import { Course as CoursePrisma } from "@prisma/client";
 
-export interface Course {
-    id:string,
-    name:string,
-    startingYear:number,
-    students:Student[],
-    school:School
+export interface Course extends CoursePrisma{
 }

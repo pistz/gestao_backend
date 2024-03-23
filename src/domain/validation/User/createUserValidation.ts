@@ -10,6 +10,6 @@ export class CreateUserValidation extends Validator<createUserDTO>{
             .withMessage("e-mail não pode ser vazio")
             .notNull()
             .withMessage("e-mail não pode ser nulo")
-            .notEqual
+            .emailAddress()
     }
 }

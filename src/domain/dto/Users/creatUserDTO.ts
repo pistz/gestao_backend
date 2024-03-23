@@ -1,6 +1,6 @@
 import { Role } from "../../entities/valueObjects/Role";
 
-export interface createUserDTO {
+export interface createUserDTO{
     userFirstName:string,
     userLastName:string,
     email:string,

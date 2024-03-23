@@ -1,19 +1,10 @@
-import { FastifyInstance } from "fastify";
-import { UserService } from "../../service/UserService";
-import { createUserDTO } from "../../domain/dto/Users/creatUserDTO";
-import { UserRepository } from "../../repositories/UserRepository";
+import express from 'express';
+import asyncify from 'express-asyncify';
+import { UserController } from '../../controllers/User/User.controller';
 
-export async function userRoutes(fastify:FastifyInstance){
-    const userRepository = new UserRepository()
-    const userUseCase = new UserService(userRepository);
+const userController = new UserController();
+export const userRouter = asyncify(express.Router());
 
-    fastify.post<{Body : createUserDTO}>('/', async (req, reply) =>{
-        const dataBody:createUserDTO = req.body;
-        try {
-            const data = await userUseCase.createUser(dataBody);
-            return reply.send(data);
-        } catch (error) {
-            reply.send(error);
-        }
-    })
-}
+userRouter
+    .route('/api/v1/users')
+    .post(userController.createUser);

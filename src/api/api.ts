@@ -1,25 +1,26 @@
-import Fastify from 'fastify';
-import cors, { FastifyCorsOptions } from '@fastify/cors'
-import { userRoutes } from './routes/User.routes';
+import express from 'express';
+import cors from 'cors';
+import { userRouter } from './routes/User.routes';
+import { schoolRouter } from './routes/School.routes';
 
 const allowedOrigins = ['http://localhost:5173'];
 
-const options:FastifyCorsOptions = {
-    origin:allowedOrigins
+const app = express();
+app.use(express.json()); // For parsing application/json
+app.use(express.urlencoded({ extended: true })); // For parsing application/x-www-form-urlencoded
+
+// Set up CORS options
+const corsOptions = {
+  origin: allowedOrigins
 };
 
-const api = Fastify();
+app.use(cors(corsOptions));
 
-api.register(cors, options);
+// TODO - routes
+app.get("/api/v1", (_req, res) => res.send("API Gestao de Frequencia Online"));
 
-//TODO- rotas
-api.get("/api/v1", (_request, reply)=> reply.send("API Gestao de Frequencia Online"));
+// Use the userRoutes with the specified prefix
+app.use(userRouter);
+app.use(schoolRouter);
 
-api.register(userRoutes, {
-    prefix:'api/v1/users',
-});
-
-
-
-
-export {api};
+export { app };

@@ -1,11 +1,9 @@
-import {api} from "./api/api";
+import { app } from "./api/api"; // Ensure that 'app' is exported from your Express setup file
+import dotenv from 'dotenv';
+dotenv.config();
 
-const port = process.env.PORT ? Number(process.env.PORT) : 3000
+const port = process.env.PORT ? Number(process.env.PORT) : 3000;
 
-api.listen({
-    host:'0.0.0.0',
-    port: port,
-}
-).then(()=>{
-    console.log(`Server running on port: ${port}`)
+app.listen(port, () => {
+  console.log(`Server running on port: ${port}`);
 });
