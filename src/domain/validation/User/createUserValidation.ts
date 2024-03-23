@@ -1,5 +1,5 @@
 import {Validator} from 'fluentvalidation-ts';
-import { createUserDTO } from '../../dto/Users/creatUserDTO';
+import { createUserDTO } from '../../dto/Users/createUserDTO';
 
 export class CreateUserValidation extends Validator<createUserDTO>{
     constructor(){

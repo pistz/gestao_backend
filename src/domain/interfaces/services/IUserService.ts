@@ -1,4 +1,4 @@
-import { createUserDTO } from "../../dto/Users/creatUserDTO";
+import { createUserDTO } from "../../dto/Users/createUserDTO";
 import { User } from "../../entities/User.entity";
 
 export interface IUserService {

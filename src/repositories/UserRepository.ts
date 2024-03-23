@@ -1,4 +1,4 @@
-import { createUserDTO } from "../domain/dto/Users/creatUserDTO";
+import { createUserDTO } from "../domain/dto/Users/createUserDTO";
 import { User } from "../domain/entities/User.entity";
 import { Role } from "../domain/entities/valueObjects/Role";
 import { IUserRepository } from "../domain/interfaces/repositories/IUser";
@@ -12,7 +12,7 @@ export class UserRepository implements IUserRepository {
     getByEmail(email: string): Promise<User | null> {
         throw new Error("Method not implemented.");
     }
-    getAll(): Promise<User[]> {
+    async getAll(): Promise<User[]> {
         throw new Error("Method not implemented.");
     }
     async createUser(createUser: createUserDTO): Promise<User> {

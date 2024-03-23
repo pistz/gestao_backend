@@ -1,6 +1,6 @@
 import { UserService } from "../../service/UserService";
 import { UserRepository } from "../../repositories/UserRepository";
-import { createUserDTO } from "../../domain/dto/Users/creatUserDTO";
+import { createUserDTO } from "../../domain/dto/Users/createUserDTO";
 import { Request, Response } from 'express';
 
 export class UserController {

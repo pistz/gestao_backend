@@ -1,4 +1,4 @@
-import { createUserDTO } from "../domain/dto/Users/creatUserDTO";
+import { createUserDTO } from "../domain/dto/Users/createUserDTO";
 import { User } from "../domain/entities/User.entity";
 import { IUserRepository } from "../domain/interfaces/repositories/IUser";
 import { IUserService } from "../domain/interfaces/services/IUserService";
