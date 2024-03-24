@@ -17,4 +17,4 @@ userRouter
 
 userRouter
     .route('/api/v1/login')
-    .get(userController.loginUser);
+    .post(userController.loginUser);
