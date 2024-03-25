@@ -1,7 +1,7 @@
 import { createUserDTO } from "../domain/dto/Users/createUserDTO";
 import { updateUserDTO } from "../domain/dto/Users/updateUserDTO";
 import { User } from "../domain/entities/User.entity";
-import { Role } from "../domain/entities/valueObjects/Role";
+import { Role, typeRole } from "../domain/entities/valueObjects/Role";
 import { IUserRepository } from "../domain/interfaces/repositories/IUserRepository";
 import { prisma } from "../utils/prismaClient/PrismaClient";
 import {User as UserPrisma, Role as RolePrisma} from '@prisma/client'
@@ -44,7 +44,7 @@ export class UserRepository implements IUserRepository {
         const result = await prisma.user.findMany()
         await prisma.$disconnect();
 
-        return result.map((u) => <User>{id:u.id, userFirstName:u.userFirstName, userLastName:u.userLastName, email:u.email, role:u.role});
+        return result.map((userList) => <User>{id:userList.id, userFirstName:userList.userFirstName, userLastName:userList.userLastName, email:userList.email, role:userList.role});
     }
 
     updateUser(user: updateUserDTO): Promise<void> {
@@ -67,7 +67,7 @@ export class UserRepository implements IUserRepository {
                 email:createUser.email,
                 password:createUser.password,
                 schoolId:createUser.schoolId,
-                role:RolePrisma[createUser.role.toString() as keyof typeof RolePrisma]
+                role:createUser.role
             }
         })
         return this.buildUser(result);
@@ -81,7 +81,7 @@ export class UserRepository implements IUserRepository {
             userLastName: user.userLastName,
             password: user.password,
             school: user.schoolId,
-            role: Role[user.role as keyof typeof Role]
+            role: user.role
         }
     }
 

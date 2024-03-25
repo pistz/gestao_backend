@@ -3,3 +3,5 @@ export enum Role {
     DESK,
     PROFESSOR,
 }
+
+export type typeRole = keyof typeof Role;

@@ -22,6 +22,7 @@ export class UserService extends BaseService implements IUserService {
         return result as User
     }
 
+    //this method returns a boolean - it should return a token for more security - also it should return more info for frontend use.
     async loginUser(email:string, password:string): Promise<boolean> {
         const foundUser = await this.getByEmail(email);
         if(!foundUser){

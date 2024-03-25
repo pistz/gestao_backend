@@ -1,4 +1,4 @@
-import { Role } from "../../entities/valueObjects/Role";
+import { typeRole } from "../../entities/valueObjects/Role";
 
 export interface createUserDTO{
     userFirstName:string,
@@ -6,5 +6,5 @@ export interface createUserDTO{
     email:string,
     password:string,
     schoolId:string,
-    role:Role,
+    role:typeRole,
 }
