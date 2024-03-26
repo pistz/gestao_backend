@@ -6,7 +6,7 @@ const schoolController = new SchoolController();
 export const schoolRouter = asyncify(express.Router());
 
 schoolRouter
-    .route('api/v1/school/:id')
+    .route('/api/v1/school/:id')
     .get(schoolController.getSchool);
 
 schoolRouter
