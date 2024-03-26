@@ -16,15 +16,26 @@ export class CourseRepository implements ICourseRepository{
         await prisma.$disconnect();
     }
     
-    getCourse(id: string): Promise<Course> {
-        throw new Error("Method not implemented.");
+    async getCourse(id: string): Promise<Course> {
+        const result = await prisma.course.findUniqueOrThrow({
+            where:{id}
+        })
+        await prisma.$disconnect();
+        return result? result : {} as Course;
     }
-    getAllCourses(): Promise<Course[]> {
-        throw new Error("Method not implemented.");
+
+    async getAllCourses(): Promise<Course[]> {
+        const result = await prisma.course.findMany();
+        return [...result] as Course[];
     }
-    deleteCourse(id: string): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    async deleteCourse(id: string): Promise<void> {
+        await prisma.course.delete({
+            where:{id}
+        })
+        await prisma.$disconnect();
     }
+
     updateCourse(id: string): Promise<void> {
         throw new Error("Method not implemented.");
     }
