@@ -5,13 +5,17 @@ import { prisma } from "../utils/prismaClient/PrismaClient";
 
 export class CourseRepository implements ICourseRepository{
 
-    async createCourse(course: createCourseDTO): Promise<void | Course> {
-        const result = await prisma.course.create({
+    async createCourse(course: createCourseDTO): Promise<void> {
+        await prisma.course.create({
             data:{
-                
+                    name:course.name,
+                    startingYear:course.startingYear,
+                    schoolId:course.schoolId,
             }
         })
+        await prisma.$disconnect();
     }
+    
     getCourse(id: string): Promise<Course> {
         throw new Error("Method not implemented.");
     }

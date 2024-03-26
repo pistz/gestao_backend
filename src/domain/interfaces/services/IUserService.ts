@@ -11,7 +11,7 @@ export interface IUserService {
 
     loginUser(email:string, password:string):Promise<boolean>
 
-    createUser(user:createUserDTO):Promise<User>
+    createUser(user:createUserDTO):Promise<void>
 
     updateUser(user:updateUserDTO):Promise<void>
 

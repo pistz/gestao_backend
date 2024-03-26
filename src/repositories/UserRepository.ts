@@ -59,7 +59,7 @@ export class UserRepository implements IUserRepository {
         await prisma.$disconnect();
     }
 
-    async createUser(createUser: createUserDTO): Promise<User> {
+    async createUser(createUser: createUserDTO): Promise<void> {
         const result = await prisma.user.create({
             data:{
                 userFirstName:createUser.userFirstName,
@@ -71,7 +71,6 @@ export class UserRepository implements IUserRepository {
             }
         })
         await prisma.$disconnect();
-        return <User>{id:result.id, email:result.email};
     }
 
 }

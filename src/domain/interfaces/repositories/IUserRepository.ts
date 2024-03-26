@@ -12,7 +12,7 @@ export interface IUserRepository {
 
     loginUser(email:string, password:string):Promise<boolean>
 
-    createUser(createUser:createUserDTO):Promise<User>
+    createUser(createUser:createUserDTO):Promise<void>
 
     updateUser(user:updateUserDTO):Promise<void>
 

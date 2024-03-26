@@ -3,7 +3,7 @@ import { Course } from "../../entities/Course.entity";
 
 export interface ICourseRepository {
 
-    createCourse(course:createCourseDTO):Promise<Course|void>
+    createCourse(course:createCourseDTO):Promise<void>
 
     getCourse(id:string):Promise<Course>
 

@@ -22,7 +22,7 @@ export class SchoolRepository implements ISchoolRepository{
     }
 
     async createSchool(createSchool: createSchoolDTO): Promise<void> {
-        const result = await prisma.school.create({
+        await prisma.school.create({
             data:{
                 schoolName:createSchool.schoolName
             }

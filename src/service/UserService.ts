@@ -52,7 +52,7 @@ export class UserService extends BaseService implements IUserService {
         return result;
     }
 
-    async createUser(user: createUserDTO): Promise<User> {
+    async createUser(user: createUserDTO): Promise<void> {
         const validator = new CreateUserValidation();
         const result = validator.validate(user);
         this.isValid(result);
@@ -60,7 +60,7 @@ export class UserService extends BaseService implements IUserService {
         const newPassword = await bcryptjs.hash(user.password, this.key)
         user.password = newPassword;
 
-        return await this.userRepository.createUser(user);
+        await this.userRepository.createUser(user);
     }
 
 }
