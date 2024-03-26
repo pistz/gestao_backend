@@ -41,9 +41,8 @@ export class UserRepository implements IUserRepository {
     }
 
     async getAll(): Promise<User[]> {
-        const result = await prisma.user.findMany()
+        const result = await prisma.user.findMany();
         await prisma.$disconnect();
-
         return result.map((userList) => <User>{id:userList.id, userFirstName:userList.userFirstName, userLastName:userList.userLastName, email:userList.email, role:userList.role});
     }
 
@@ -57,6 +56,7 @@ export class UserRepository implements IUserRepository {
                 id:userId
             }
         }) 
+        await prisma.$disconnect();
     }
 
     async createUser(createUser: createUserDTO): Promise<User> {
@@ -70,19 +70,8 @@ export class UserRepository implements IUserRepository {
                 role:createUser.role
             }
         })
-        return this.buildUser(result);
-    }
-
-    private buildUser(user:UserPrisma):User{
-        return <User><unknown>{
-            id: user.id,
-            email: user.email,
-            userFirstName: user.userFirstName,
-            userLastName: user.userLastName,
-            password: user.password,
-            school: user.schoolId,
-            role: user.role
-        }
+        await prisma.$disconnect();
+        return <User>{id:result.id, email:result.email};
     }
 
 }

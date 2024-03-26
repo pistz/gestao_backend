@@ -14,12 +14,20 @@ export class SchoolService extends BaseService implements ISchoolService{
         this.schoolRepository = schoolRespository;
     }
 
+    async getAllSchools(): Promise<School[]> {
+        return await this.schoolRepository.getAll();
+    }
+
+    async getSchool(id: string): Promise<School> {
+        return await this.schoolRepository.get(id); 
+    }
+
     async createSchool(school: createSchoolDTO): Promise<void> {
         const validator = new CreateSchoolValidation();
         const result = validator.validate(school);
         this.isValid(result);
 
-        return await this.schoolRepository.createSchool(school);
+        await this.schoolRepository.createSchool(school);
     }
 
 }

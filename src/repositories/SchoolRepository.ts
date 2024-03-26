@@ -4,18 +4,30 @@ import { ISchoolRepository } from "../domain/interfaces/repositories/ISchoolRepo
 import { prisma } from "../utils/prismaClient/PrismaClient";
 
 export class SchoolRepository implements ISchoolRepository{
-    get(id: string): Promise<void | null> {
-        throw new Error("Method not implemented.");
+
+    async get(id: string): Promise<School> {
+        const result = await prisma.school.findUniqueOrThrow({
+            where:{
+                id
+            }
+        })
+        await prisma.$disconnect();
+        return result as School;
     }
-    getAll(): Promise<School[]> {
-        throw new Error("Method not implemented.");
+
+    async getAll(): Promise<School[]> {
+        const result = await prisma.school.findMany();
+        await prisma.$disconnect();
+        return result.map((schools) => <School>{id:schools.id, schoolName:schools.schoolName});
     }
+
     async createSchool(createSchool: createSchoolDTO): Promise<void> {
         const result = await prisma.school.create({
             data:{
                 schoolName:createSchool.schoolName
             }
         })
+        await prisma.$disconnect();
     }
 
 }

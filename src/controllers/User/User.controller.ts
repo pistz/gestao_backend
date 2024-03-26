@@ -5,6 +5,7 @@ import { Request, Response } from 'express';
 
 export class UserController {
 
+
     async loginUser(request:Request, response:Response){
         const userRepository = new UserRepository();
         const userService = new UserService(userRepository);
@@ -25,7 +26,6 @@ export class UserController {
         const userService = new UserService(userRepository);
 
         const id = request.params.id;
-
         try {
             const user = await userService.get(id);
             response.json(user);
@@ -52,10 +52,9 @@ export class UserController {
         const userService = new UserService(userRepository);
 
         const newUser:createUserDTO = request.body;
-
         try {
-            const result = await userService.createUser(newUser);
-            response.status(201).json({ success: true, data: result });
+            await userService.createUser(newUser);
+            response.status(201).json({ success: true, data: "Usuário Criado" });
         } catch (error) {
             response.status(500).json({ success: false, message: 'Internal Server Error' });
         }
@@ -66,7 +65,6 @@ export class UserController {
         const userService = new UserService(userRepository);
 
         const id = request.params.id;
-
         try {
             await userService.deleteUser(id);
             response.status(200).json({ success: true, message: "Usuário apagado"  });

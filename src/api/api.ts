@@ -13,11 +13,10 @@ app.use(express.urlencoded({ extended: true })); // For parsing application/x-ww
 const corsOptions = {
   origin: allowedOrigins
 };
-
 app.use(cors(corsOptions));
 
-// TODO - routes
 app.get("/api/v1", (_req, res) => res.send("API Gestao de Frequencia Online"));
+// TODO - routes
 
 app.use(userRouter);
 app.use(schoolRouter);

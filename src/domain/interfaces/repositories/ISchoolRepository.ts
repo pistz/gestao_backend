@@ -4,7 +4,8 @@ import { School } from "../../entities/School.entity";
 
 
 export interface ISchoolRepository {
-    get(id:string):Promise<void | null>;
+
+    get(id:string):Promise<School>;
 
     getAll():Promise<School[]>;
 
