@@ -1,4 +1,5 @@
 import { createSchoolDTO } from "../domain/dto/Schools/createSchoolDTO";
+import { Course } from "../domain/entities/Course.entity";
 import { School } from "../domain/entities/School.entity";
 import { ISchoolRepository } from "../domain/interfaces/repositories/ISchoolRepository";
 import { prisma } from "../utils/prismaClient/PrismaClient";
@@ -9,11 +10,10 @@ export class SchoolRepository implements ISchoolRepository{
         const result = await prisma.school.findUniqueOrThrow({
             where:{
                 id
-            },
-            include:{courses:true}
+            }
         })
         await prisma.$disconnect();
-        return result as School;
+        return {id:result.id, schoolName:result.schoolName};
     }
 
     async getAll(): Promise<School[]> {
@@ -21,7 +21,7 @@ export class SchoolRepository implements ISchoolRepository{
             include:{courses:true}
         });
         await prisma.$disconnect();
-        return result.map((schools) => <School>{id:schools.id, schoolName:schools.schoolName});
+        return result.map((schools) => <School>{id:schools.id, schoolName:schools.schoolName,});
     }
 
     async createSchool(createSchool: createSchoolDTO): Promise<void> {

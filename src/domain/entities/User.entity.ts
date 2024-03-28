@@ -1,13 +1,12 @@
 import { typeRole } from "./valueObjects/Role";
 import { School } from "./School.entity";
 
-
-export interface User {
+export interface User{
     id:string,
     userFirstName:string,
     userLastName:string,
     email:string,
     password:string,
-    role:typeRole
-    schoolId:School,
+    role:typeRole,
+    school:School
 }

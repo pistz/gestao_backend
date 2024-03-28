@@ -4,7 +4,6 @@ import { User } from "../domain/entities/User.entity";
 import { Role, typeRole } from "../domain/entities/valueObjects/Role";
 import { IUserRepository } from "../domain/interfaces/repositories/IUserRepository";
 import { prisma } from "../utils/prismaClient/PrismaClient";
-import {User as UserPrisma, Role as RolePrisma} from '@prisma/client'
 
 export class UserRepository implements IUserRepository {
 
@@ -60,7 +59,7 @@ export class UserRepository implements IUserRepository {
     }
 
     async createUser(createUser: createUserDTO): Promise<void> {
-        const result = await prisma.user.create({
+        await prisma.user.create({
             data:{
                 userFirstName:createUser.userFirstName,
                 userLastName:createUser.userLastName,

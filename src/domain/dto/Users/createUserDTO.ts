@@ -1,4 +1,3 @@
-import { School } from "../../entities/School.entity";
 import { typeRole } from "../../entities/valueObjects/Role";
 
 export interface createUserDTO{
@@ -6,6 +5,6 @@ export interface createUserDTO{
     userLastName:string,
     email:string,
     password:string,
-    schoolId:School,
+    schoolId:string,
     role:typeRole,
 }

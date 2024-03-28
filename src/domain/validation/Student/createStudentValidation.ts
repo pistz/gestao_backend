@@ -25,13 +25,5 @@ export class CreateStudentValidation extends Validator<createStudentsDTO>{
         .notNull()
         .withMessage("email não pode ser nulo")
 
-        this.ruleFor('schoolId')
-        .notEmpty()
-        .withMessage("schoolId não pode ser vazio")
-        .notNull()
-        .withMessage("schoolId não pode ser vazio")
-
-
-
     }
 }

@@ -1,5 +1,7 @@
 import { createStudentsDTO } from "../domain/dto/Students/createStudentsDTO";
 import { updateStudentDTO } from "../domain/dto/Students/updateStudentDTO";
+import { AttendanceList } from "../domain/entities/AttendanceList.entity";
+import { Course } from "../domain/entities/Course.entity";
 import { Student } from "../domain/entities/Student.entity";
 import { IStudentRepository } from "../domain/interfaces/repositories/IStudentRepository";
 import { prisma } from "../utils/prismaClient/PrismaClient";
@@ -12,7 +14,6 @@ export class StudentRepository implements IStudentRepository{
                 firstName:student.firstName,
                 lastName:student.lastName,
                 email:student.email,
-                schoolId:student.schoolId,
             }
         })
         await prisma.$disconnect();
@@ -20,17 +21,42 @@ export class StudentRepository implements IStudentRepository{
 
     async getStudent(id: number): Promise<Student> {
         const student = await prisma.students.findUniqueOrThrow({
-            where:{id},
-            include:{school:true, courses:true, attendances:true}
-        })
+            include:{
+                courses:{
+                    include:{
+                        school:true,
+                    },
+                },
+                attendances:true,
+            },
+
+            where:{id}
+        });
+
         await prisma.$disconnect();
-        return student as Student
+        return <Student>{
+            id:student.id,
+            firstName:student.firstName,
+            lastName:student.lastName,
+            email:student.email,
+            course: {},
+            list: {}
+        }
     }
 
     async getAllStudents(): Promise<Student[]> {
-        const students = await prisma.students.findMany();
+        const students = await prisma.students.findMany({
+            include:{courses:true, attendances:true}
+        });
         await prisma.$disconnect();
-        return [...students] as Student[]
+        return students.map((student) => <Student>{
+            id:student.id,
+            firstName:student.firstName,
+            lastName:student.lastName,
+            email:student.email,
+            course:{} as Course,
+            list:{} as AttendanceList
+        })
     }
 
     async getStudentByEmail(email: string): Promise<Student> {
@@ -38,7 +64,7 @@ export class StudentRepository implements IStudentRepository{
             where:{email}
         })
         await prisma.$disconnect();
-        return <Student>{id:student.id, firstName:student.firstName, lastName:student.lastName, email:student.email, schoolId:student.schoolId}
+        return <Student>{id:student.id, firstName:student.firstName, lastName:student.lastName, email:student.email,}
     }
 
     async deleteStudent(id: number): Promise<void> {
@@ -55,8 +81,17 @@ export class StudentRepository implements IStudentRepository{
                 firstName:student.firstName,
                 lastName:student.lastName,
                 email:student.lastName,
-                courses:{}
-            }
+                courses:{
+                    connect:{
+                        id:student.courseId,
+                    }
+                },
+                attendances:{
+                    connect:{
+                        id:student.listId
+                    }
+                }
+            },
         })
     }
 
