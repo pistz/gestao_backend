@@ -1,8 +1,9 @@
+import { School } from "../../entities/School.entity";
 
 export interface createCourseDTO {
     name:string,
     startingYear:number,
-    schoolId:string,
+    schoolId:School,
     createdAt:Date,
     modifiedAt:Date
 }

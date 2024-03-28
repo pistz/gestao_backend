@@ -18,14 +18,18 @@ export class CourseRepository implements ICourseRepository{
     
     async getCourse(id: string): Promise<Course> {
         const result = await prisma.course.findUniqueOrThrow({
-            where:{id}
+            where:{id},
+            include:{students:true}
         })
         await prisma.$disconnect();
         return result? result : {} as Course;
     }
 
     async getAllCourses(): Promise<Course[]> {
-        const result = await prisma.course.findMany();
+        const result = await prisma.course.findMany({
+            include:{students:true,school:true}
+        });
+        await prisma.$disconnect();
         return [...result] as Course[];
     }
 

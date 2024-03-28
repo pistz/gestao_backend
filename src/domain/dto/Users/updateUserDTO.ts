@@ -1,4 +1,4 @@
-import { Role } from "../../entities/valueObjects/Role";
+import { typeRole } from "../../entities/valueObjects/Role";
 
 export interface updateUserDTO{
     id:string,
@@ -7,5 +7,5 @@ export interface updateUserDTO{
     email:string,
     password:string,
     schoolId:string,
-    role:Role,
+    role:typeRole,
 }

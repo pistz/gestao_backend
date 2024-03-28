@@ -1,7 +1,13 @@
-import { User as UserPrisma} from "@prisma/client";
 import { typeRole } from "./valueObjects/Role";
+import { School } from "./School.entity";
 
 
-export interface User extends UserPrisma {
+export interface User {
+    id:string,
+    userFirstName:string,
+    userLastName:string,
+    email:string,
+    password:string,
     role:typeRole
+    schoolId:School,
 }
