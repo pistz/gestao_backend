@@ -1,5 +1,5 @@
 export interface CourseRelation {
-    id?: string;
+    id: string;
     studentId: number;
     courseId: string;
 }

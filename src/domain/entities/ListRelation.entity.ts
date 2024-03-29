@@ -1,5 +1,5 @@
 export interface ListRelation {
-    id?: string;
+    id: string;
     studentId: number;
     attendanceListId: string;
 }

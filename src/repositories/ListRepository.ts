@@ -1,3 +1,4 @@
+import { lstat } from "fs";
 import { createListDTO } from "../domain/dto/Lists/createListDTO";
 import { AttendanceList } from "../domain/entities/AttendanceList.entity";
 import { IAttendanceListRepository } from "../domain/interfaces/repositories/IAttendanceListRepository";
@@ -8,7 +9,7 @@ export class AttendanceListRepository implements IAttendanceListRepository{
     async createList(list: createListDTO): Promise<void> {
         await prisma.attendanceList.create({
             data:{
-                attendanceDate:list.attendanceData,
+                attendanceDate:list.attendanceDate,
                 courseId:list.courseId
             }
         })
@@ -25,6 +26,7 @@ export class AttendanceListRepository implements IAttendanceListRepository{
             id:list.id,
             attendanceDate:list.attendanceDate,
             courseId:list.courseId,
+            students:list.students
         };
     }
 
