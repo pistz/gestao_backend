@@ -1,7 +1,7 @@
-import { UserService } from "../../service/UserService";
-import { UserRepository } from "../../repositories/UserRepository";
-import { createUserDTO } from "../../domain/dto/Users/createUserDTO";
+import { UserRepository } from "../../../repositories/UserRepository";
+import { createUserDTO } from "../../../domain/dto/Users/createUserDTO";
 import { Request, Response } from 'express';
+import { UserService } from "../../../domain/service/UserService";
 
 export class UserController {
 
@@ -54,7 +54,7 @@ export class UserController {
         const newUser:createUserDTO = request.body;
         try {
             await userService.createUser(newUser);
-            response.status(201).json({ success: true, data: "Usuário Criado" });
+            response.status(201).json({ success: true, message: "Usuário Criado" });
         } catch (error) {
             response.status(500).json({ success: false, message: 'Internal Server Error' });
         }

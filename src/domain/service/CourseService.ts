@@ -1,9 +1,9 @@
-import { createCourseDTO } from "../domain/dto/Courses/createCourseDTO";
-import { Course } from "../domain/entities/Course.entity";
-import { ICourseService } from "../domain/interfaces/services/ICourseService";
-import { CourseRepository } from "../repositories/CourseRepository";
+import { CourseRepository } from "../../repositories/CourseRepository";
+import { createCourseDTO } from "../dto/Courses/createCourseDTO";
+import { Course } from "../entities/Course.entity";
+import { ICourseService } from "../interfaces/services/ICourseService";
+import { CreateCourseValidation } from "../validation/Course/createCourseValidation";
 import { BaseService } from "./base/baseService";
-import { CreateCourseValidation } from "../domain/validation/Course/createCourseValidation";
 
 export class CourseService extends BaseService implements ICourseService {
 

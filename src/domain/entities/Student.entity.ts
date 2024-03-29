@@ -1,11 +1,10 @@
-import { AttendanceList } from "./AttendanceList.entity";
-import { Course } from "./Course.entity";
-
+import { CourseRelation } from "./CourseRelation.entity";
+import { ListRelation } from "./ListRelation.entity";
 export interface Student{
     id:number,
     firstName:string,
     lastName:string,
     email:string,
-    course:Course,
-    list:AttendanceList
+    courses:CourseRelation[],
+    lists:ListRelation[]
 }

@@ -1,8 +1,9 @@
-import { createSchoolDTO } from "../domain/dto/Schools/createSchoolDTO";
-import { School } from "../domain/entities/School.entity";
-import { ISchoolService } from "../domain/interfaces/services/ISchoolService";
-import { CreateSchoolValidation } from "../domain/validation/School/createSchoolValidation";
-import { SchoolRepository } from "../repositories/SchoolRepository";
+
+import { SchoolRepository } from "../../repositories/SchoolRepository";
+import { createSchoolDTO } from "../dto/Schools/createSchoolDTO";
+import { School } from "../entities/School.entity";
+import { ISchoolService } from "../interfaces/services/ISchoolService";
+import { CreateSchoolValidation } from "../validation/School/createSchoolValidation";
 import { BaseService } from "./base/baseService";
 
 export class SchoolService extends BaseService implements ISchoolService{

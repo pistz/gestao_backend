@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
-import { SchoolRepository } from "../../repositories/SchoolRepository";
-import { SchoolService } from "../../service/SchoolService";
-import { createSchoolDTO } from "../../domain/dto/Schools/createSchoolDTO";
+import { SchoolRepository } from "../../../repositories/SchoolRepository";
+import { createSchoolDTO } from "../../../domain/dto/Schools/createSchoolDTO";
+import { SchoolService } from '../../../domain/service/SchoolService';
 
 export class SchoolController {
 
@@ -12,10 +12,10 @@ export class SchoolController {
         const newSchool:createSchoolDTO = request.body;
         try {
             await schoolService.createSchool(newSchool);
-            response.status(201).json({ success: true, data: "School Created" });
+            response.status(201).json({ success: true, message: "School Created" });
         } catch (err) {
             console.error(err);
-            response.status(500).json({ success: false, error: 'Internal Server Error' });
+            response.status(500).json({ success: false, message: 'Internal Server Error' });
         }
     }
 

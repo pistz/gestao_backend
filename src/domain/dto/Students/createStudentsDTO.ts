@@ -1,8 +1,7 @@
 export interface createStudentsDTO {
-    firstName:string,
-    lastName:string,
-    email:string,
-    schoolId:string,
-    courseId?:string,
-    listId?:string,
+    firstName: string;
+    lastName: string;
+    email: string;
+    courseIds?: string[]; 
+    listIds?: string[];   
 }

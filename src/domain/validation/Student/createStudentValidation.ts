@@ -24,6 +24,7 @@ export class CreateStudentValidation extends Validator<createStudentsDTO>{
         .withMessage("email não pode ser vazio")
         .notNull()
         .withMessage("email não pode ser nulo")
+        .emailAddress()
 
     }
 }

@@ -1,6 +1,6 @@
 import express from 'express';
 import asyncify from 'express-asyncify';
-import { SchoolController } from '../../controllers/School/School.controller';
+import { SchoolController } from '../controllers/School/School.controller';
 
 const schoolController = new SchoolController();
 export const schoolRouter = asyncify(express.Router());

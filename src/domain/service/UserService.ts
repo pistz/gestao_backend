@@ -1,9 +1,10 @@
-import { createUserDTO } from "../domain/dto/Users/createUserDTO";
-import { updateUserDTO } from "../domain/dto/Users/updateUserDTO";
-import { User } from "../domain/entities/User.entity";
-import { IUserRepository } from "../domain/interfaces/repositories/IUserRepository";
-import { IUserService } from "../domain/interfaces/services/IUserService";
-import { CreateUserValidation } from "../domain/validation/User/createUserValidation";
+
+import { createUserDTO } from "../dto/Users/createUserDTO";
+import { updateUserDTO } from "../dto/Users/updateUserDTO";
+import { User } from "../entities/User.entity";
+import { IUserRepository } from "../interfaces/repositories/IUserRepository";
+import { IUserService } from "../interfaces/services/IUserService";
+import { CreateUserValidation } from "../validation/User/createUserValidation";
 import { BaseService } from "./base/baseService";
 import bcryptjs from "bcryptjs";
 

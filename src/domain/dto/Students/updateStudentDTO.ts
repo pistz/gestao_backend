@@ -1,9 +1,8 @@
-export interface updateStudentDTO{
-    id:number,
-    firstName:string,
-    lastName:string,
-    email:string,
-    courseId:string,
-    schoolId:string,
-    listId?:string,
+export interface updateStudentDTO {
+    id: number;           
+    firstName: string;    
+    lastName: string;    
+    email: string;        
+    courseIds?: string[]; 
+    listIds?: string[];    
 }

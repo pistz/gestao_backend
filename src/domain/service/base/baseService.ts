@@ -1,5 +1,6 @@
 import { ValidationErrors } from "fluentvalidation-ts/dist/index"
-import { ValidationError } from "../../domain/exceptions/ValidationError"
+import { ValidationError } from "../../exceptions/ValidationError";
+
 
 export abstract class BaseService{
     

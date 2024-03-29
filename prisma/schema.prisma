@@ -19,8 +19,8 @@ model Course {
   id           String           @id @default(uuid())
   name         String
   startingYear Int
-  students     Students[]
-  lists        AttendanceList[]
+  students     CourseStudent[] // Relacionamento muitos-para-muitos com alunos através da tabela de junção CourseStudent
+  lists        AttendanceList[] // Lista de presença associada ao curso (um-para-muitos)
   school       School           @relation(fields: [schoolId], references: [id])
   schoolId     String
   createdAt    DateTime         @default(now())
@@ -28,26 +28,42 @@ model Course {
 }
 
 // Definição da tabela 'Aluno'
-model Students {
-  id          Int              @id @default(autoincrement())
-  firstName   String
-  lastName    String
-  email       String           @unique
-  courses     Course[]
-  attendances AttendanceList[]
-  createdAt   DateTime         @default(now())
-  modifiedAt  DateTime         @updatedAt
+model Student {
+  id         Int                     @id @default(autoincrement())
+  firstName  String
+  lastName   String
+  email      String                  @unique
+  courses    CourseStudent[] // Relacionamento muitos-para-muitos com cursos através da tabela de junção CourseStudent
+  lists      AttendanceListStudent[] // Relacionamento muitos-para-muitos com listas de presença através da tabela de junção AttendanceListStudent
+  createdAt  DateTime                @default(now())
+  modifiedAt DateTime                @updatedAt
 }
 
 // Definição da tabela 'ListaPresenca'
 model AttendanceList {
-  id             String     @id @default(uuid())
-  attendanceDate DateTime
-  createdAt      DateTime   @default(now())
-  modifiedAt     DateTime   @updatedAt
-  Course         Course     @relation(fields: [courseId], references: [id])
+  id             String                  @id @default(uuid())
+  attendanceDate String                  @unique
+  createdAt      DateTime                @default(now())
+  modifiedAt     DateTime                @updatedAt
+  Course         Course                  @relation(fields: [courseId], references: [id])
   courseId       String
-  students       Students[]
+  students       AttendanceListStudent[] // Relacionamento muitos-para-muitos com alunos através da tabela de junção AttendanceListStudent
+}
+
+model CourseStudent {
+  id        String  @id @default(uuid())
+  student   Student @relation(fields: [studentId], references: [id])
+  studentId Int
+  course    Course  @relation(fields: [courseId], references: [id])
+  courseId  String
+}
+
+model AttendanceListStudent {
+  id               String         @id @default(uuid())
+  student          Student        @relation(fields: [studentId], references: [id])
+  studentId        Int
+  attendanceList   AttendanceList @relation(fields: [attendanceListId], references: [id])
+  attendanceListId String
 }
 
 // Definição da tabela 'Usuario'

@@ -1,6 +1,6 @@
 import express from 'express';
 import asyncify from 'express-asyncify';
-import { CourseController } from '../../controllers/Course/Course.controller';
+import { CourseController } from '../controllers/Course/Course.controller';
 
 
 const courseController = new CourseController();
