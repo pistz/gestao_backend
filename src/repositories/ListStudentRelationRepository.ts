@@ -4,34 +4,48 @@ import { prisma } from "../utils/prismaClient/PrismaClient";
 
 export class ListRelationRepository implements IListRelationRepository{
 
+    async getStudentsToList(attendanceListId: string): Promise<ListRelation[]> {
+        const studentList = await prisma.attendanceListStudent.findMany({
+            where:{attendanceListId}
+        });
+        await prisma.$disconnect();
+        return [...studentList] as ListRelation[];
+    }
+
     async createListRelation(attendanceListId: string, studentId: number): Promise<void> {
         await prisma.attendanceListStudent.create({
             data:{
                 attendanceListId,
                 studentId
             }
-        })
+        });
+        await prisma.$disconnect();
     }
 
-    async getListRelationId(attendanceListId: string, studentId: number): Promise<string> {
+    async getListRelationIds(attendanceListId: string, studentId: number): Promise<ListRelation[]> {
 
-        const relationId = await prisma.attendanceListStudent.findUniqueOrThrow({
+        const relationId = await prisma.attendanceListStudent.findMany({
             where:{
-                id:
                     attendanceListId,
                     studentId
             }
         })
         await prisma.$disconnect();
-        return relationId.id;
+        return [...relationId] as ListRelation[];
     }
+    
     async getListRelation(id: string): Promise<ListRelation> {
         const relations = await prisma.attendanceListStudent.findUniqueOrThrow({
-            where:{id}
+            where:{id},
+            include:{attendanceList:{
+                include:{Course:true}
+            }}
         })
 
         await prisma.$disconnect();
         return relations;
     }
+
+
 
 }

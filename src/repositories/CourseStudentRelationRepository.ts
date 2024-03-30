@@ -14,24 +14,23 @@ export class CourseRelationRepository implements ICourseRelationRepository{
         await prisma.$disconnect();
     }
 
-    async getCourseRelationId(courseId: string, studentId: number): Promise<string> {
-        const relationId = await prisma.courseStudent.findUniqueOrThrow({
+    async getCourseRelationIds(courseId: string, studentId: number): Promise<CourseRelation[]> {
+        const relations = await prisma.courseStudent.findMany({
             where:{
-                id:
                 courseId,
                 studentId
             }
         })
         await prisma.$disconnect();
-        return relationId.id;
+        return [...relations] as CourseRelation[];
     }
 
     async getCourseRelation(id: string): Promise<CourseRelation> {
-        const relations = await prisma.courseStudent.findUniqueOrThrow({
+        const relation = await prisma.courseStudent.findUniqueOrThrow({
             where:{id}
         })
         await prisma.$disconnect();
-        return relations;
+        return relation;
     }
 
     async deleteCourseRelation(id: string): Promise<void> {

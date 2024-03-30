@@ -4,7 +4,9 @@ import { userRouter } from './routes/User.routes';
 import { schoolRouter } from './routes/School.routes';
 import { courseRouter } from './routes/Course.routes';
 import { studentRouter } from './routes/Student.routes';
-import { attendanceListRouter } from './routes/Lists.routes';
+import { attendanceListRouter } from './routes/AttendanceLists.routes';
+import { enrollmentRouter } from './routes/CourseEnrollment.routes';
+import { classAttendanceRouter } from './routes/ClassAttendance.routes';
 
 const allowedOrigins = ['http://localhost:5173'];
 
@@ -26,6 +28,8 @@ app.use(userRouter);
 app.use(schoolRouter);
 app.use(courseRouter);
 app.use(studentRouter);
-app.use(attendanceListRouter)
+app.use(attendanceListRouter);
+app.use(enrollmentRouter);
+app.use(classAttendanceRouter)
 
 export { app };

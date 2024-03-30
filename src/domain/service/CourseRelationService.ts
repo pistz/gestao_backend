@@ -16,8 +16,8 @@ export class CourseRelationService extends BaseService implements ICourseRelatio
         await this.courseRelationRepository.createCourseRelation(courseId, studentId);
     }
     
-    async getCourseRelationId(courseId: string, studentId: number): Promise<string> {
-        const courseRelationId = await this.courseRelationRepository.getCourseRelationId(courseId, studentId);
+    async getCourseRelationIds(courseId: string, studentId: number): Promise<CourseRelation[]> {
+        const courseRelationId = await this.courseRelationRepository.getCourseRelationIds(courseId, studentId);
         return courseRelationId;
     }
 
@@ -29,5 +29,5 @@ export class CourseRelationService extends BaseService implements ICourseRelatio
     async deleteCourseRelation(id: string): Promise<void> {
         await this.courseRelationRepository.deleteCourseRelation(id);
     }
-
+    
 }

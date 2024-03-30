@@ -69,5 +69,6 @@ export class StudentService extends BaseService implements IStudentService{
         await this.studentRepository.updateStudent(updatedFields);
     }
     
+    
 
 }

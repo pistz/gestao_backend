@@ -11,13 +11,18 @@ export class ListRelationService extends BaseService implements IListRelationSer
         super();
         this.listRelationRepository = listRelationRepository;
     }
+
+    async getStudentsToList(attendanceListId: string): Promise<ListRelation[]> {
+        const studentList = await this.listRelationRepository.getStudentsToList(attendanceListId);
+        return studentList;
+    }
     
     async createListRelation(attendanceListId: string, studentId: number): Promise<void> {
         await this.listRelationRepository.createListRelation(attendanceListId, studentId);
     }
 
-    async getListRelationId(attendanceListId: string, studentId: number): Promise<string> {
-        const listRelationId = await this.listRelationRepository.getListRelationId(attendanceListId, studentId);
+    async getListRelationIds(attendanceListId: string, studentId: number): Promise<ListRelation[]> {
+        const listRelationId = await this.listRelationRepository.getListRelationIds(attendanceListId, studentId);
         return listRelationId;
     }
 

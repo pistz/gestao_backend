@@ -57,6 +57,5 @@ export class CourseController {
         } catch (error) {
             response.status(500).json({ success: false, message: 'Internal Server Error' });
         }
-
     }
 }
