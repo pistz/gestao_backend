@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { AttendanceListRepository } from "../../../repositories/ListRepository";
+import { AttendanceListRepository } from "../../../repositories/AttendanceListRepository";
 import { AttendanceListService } from "../../../domain/service/AttendanceListService";
 import { createListDTO } from "../../../domain/dto/Lists/createListDTO";
 

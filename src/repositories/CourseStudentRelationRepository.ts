@@ -1,12 +1,20 @@
-import { Course } from "../domain/entities/Course.entity";
 import { CourseRelation } from "../domain/entities/CourseRelation.entity";
-import { ICourseRelation } from "../domain/interfaces/repositories/ICourseRelationRepository";
+import { ICourseRelationRepository } from "../domain/interfaces/repositories/ICourseRelationRepository";
 import { prisma } from "../utils/prismaClient/PrismaClient";
-import { CourseRepository } from "./CourseRepository";
 
-export class CourseRelationRepository implements ICourseRelation{
+export class CourseRelationRepository implements ICourseRelationRepository{
 
-    async getCourseRelationId(courseId: string, studentId: number): Promise<CourseRelation> {
+    async createCourseRelation(courseId: string, studentId: number): Promise<void> {
+        await prisma.courseStudent.create({
+            data:{
+                courseId,
+                studentId
+            }
+        })
+        await prisma.$disconnect();
+    }
+
+    async getCourseRelationId(courseId: string, studentId: number): Promise<string> {
         const relationId = await prisma.courseStudent.findUniqueOrThrow({
             where:{
                 id:
@@ -15,7 +23,7 @@ export class CourseRelationRepository implements ICourseRelation{
             }
         })
         await prisma.$disconnect();
-        return relationId;
+        return relationId.id;
     }
 
     async getCourseRelation(id: string): Promise<CourseRelation> {

@@ -44,42 +44,16 @@ export class StudentService extends BaseService implements IStudentService{
 
     async updateStudent(student: updateStudentDTO): Promise<void> {
         const existingStudent = await this.studentRepository.getStudent(Number(student.id));
-    
-        const updatedCourseRelations: CourseRelation[] = existingStudent.courses.filter(cr => 
-            student.courseIds?.includes(cr.courseId)
-        );
-    
-        const updatedListRelations: ListRelation[] = existingStudent.lists.filter(lr => 
-            student.listIds?.includes(lr.attendanceListId)
-        );
-    
-        student.courseIds?.forEach(courseId => {
-            if (!updatedCourseRelations.some(cr => cr.courseId === courseId)) {
-                updatedCourseRelations.push({
-                    id: '', // This should be generated or fetched if necessary.
-                    studentId: existingStudent.id,
-                    courseId: courseId
-                });
-            }
-        });
-    
-        student.listIds?.forEach(listId => {
-            if (!updatedListRelations.some(lr => lr.attendanceListId === listId)) {
-                updatedListRelations.push({
-                    id: '', // This should be generated or fetched if necessary.
-                    studentId: existingStudent.id,
-                    attendanceListId: listId
-                });
-            }
-        });
-    
-        const updatedFields: Student = {
+        
+        if(!existingStudent){
+            throw Error('Not Found')
+        }
+            
+        const updatedFields: updateStudentDTO = {
             id: existingStudent.id,
             firstName: student.firstName ?? existingStudent.firstName,
             lastName: student.lastName ?? existingStudent.lastName,
             email: student.email ?? existingStudent.email,
-            courses: updatedCourseRelations,
-            lists: updatedListRelations
         };
     
         if (student.firstName && student.firstName !== existingStudent.firstName) {

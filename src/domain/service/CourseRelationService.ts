@@ -1,16 +1,33 @@
+import { CourseRelationRepository } from "../../repositories/CourseStudentRelationRepository";
 import { CourseRelation } from "../entities/CourseRelation.entity";
-import { ICourseRelation } from "../interfaces/services/ICourseRelationService";
+import { ICourseRelationService } from "../interfaces/services/ICourseRelationService";
+import { BaseService } from "./base/baseService";
 
-export class CourseRelationService implements ICourseRelation{
+export class CourseRelationService extends BaseService implements ICourseRelationService{
+
+    private courseRelationRepository:CourseRelationRepository;
+
+    constructor(courseRelationRepository:CourseRelationRepository){
+        super();
+        this.courseRelationRepository = courseRelationRepository;
+    }
+
+    async createCourseRelation(courseId: string, studentId: number): Promise<void> {
+        await this.courseRelationRepository.createCourseRelation(courseId, studentId);
+    }
     
-    getCourseRelationId(courseId: string, studentId: number): Promise<string> {
-        throw new Error("Method not implemented.");
+    async getCourseRelationId(courseId: string, studentId: number): Promise<string> {
+        const courseRelationId = await this.courseRelationRepository.getCourseRelationId(courseId, studentId);
+        return courseRelationId;
     }
-    getCourseRelation(id: string): Promise<CourseRelation> {
-        throw new Error("Method not implemented.");
+
+    async getCourseRelation(id: string): Promise<CourseRelation> {
+        const courseRelation = await this.courseRelationRepository.getCourseRelation(id);
+        return courseRelation;
     }
-    deleteCourseRelation(id: string): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    async deleteCourseRelation(id: string): Promise<void> {
+        await this.courseRelationRepository.deleteCourseRelation(id);
     }
 
 }

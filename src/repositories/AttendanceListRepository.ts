@@ -1,4 +1,3 @@
-import { lstat } from "fs";
 import { createListDTO } from "../domain/dto/Lists/createListDTO";
 import { AttendanceList } from "../domain/entities/AttendanceList.entity";
 import { IAttendanceListRepository } from "../domain/interfaces/repositories/IAttendanceListRepository";

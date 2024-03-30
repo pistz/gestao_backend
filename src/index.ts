@@ -1,4 +1,4 @@
-import { app } from "./api/api"; // Ensure that 'app' is exported from your Express setup file
+import { app } from "./api/api";
 import dotenv from 'dotenv';
 dotenv.config();
 

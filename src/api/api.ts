@@ -19,6 +19,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 app.get("/api/v1", (_req, res) => res.send("API Gestao de Frequencia Online"));
+
 // TODO - routes
 
 app.use(userRouter);

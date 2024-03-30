@@ -1,4 +1,4 @@
-import { AttendanceListRepository } from "../../repositories/ListRepository";
+import { AttendanceListRepository } from "../../repositories/AttendanceListRepository";
 import { createListDTO } from "../dto/Lists/createListDTO";
 import { AttendanceList } from "../entities/AttendanceList.entity";
 import { IAttendanceListService } from "../interfaces/services/IAttendanceListService";
