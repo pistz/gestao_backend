@@ -3,6 +3,7 @@ import { ListRelation } from "../entities/ListRelation.entity";
 import { IListRelationService } from "../interfaces/services/IListRelationService";
 import { BaseService } from "./base/baseService";
 
+
 export class ListRelationService extends BaseService implements IListRelationService{
 
     private listRelationRepository:ListRelationRepository;

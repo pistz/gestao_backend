@@ -56,6 +56,8 @@ model CourseStudent {
   studentId Int
   course    Course  @relation(fields: [courseId], references: [id])
   courseId  String
+
+  @@unique([studentId, courseId])
 }
 
 model AttendanceListStudent {
@@ -64,6 +66,8 @@ model AttendanceListStudent {
   studentId        Int
   attendanceList   AttendanceList @relation(fields: [attendanceListId], references: [id])
   attendanceListId String
+
+  @@unique([studentId, attendanceListId])
 }
 
 // Definição da tabela 'Usuario'

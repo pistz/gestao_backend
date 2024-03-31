@@ -13,14 +13,31 @@ export class ListRelationRepository implements IListRelationRepository{
     }
 
     async createListRelation(attendanceListId: string, studentId: number): Promise<void> {
-        await prisma.attendanceListStudent.create({
-            data:{
-                attendanceListId,
-                studentId
-            }
+        
+        const attendanceListCourseId = await prisma.attendanceList.findUnique({
+            where: { id: attendanceListId },
+            select: { courseId: true }
         });
+    
+        
+        const studentCourses = await prisma.student.findUnique({
+            where: { id: studentId },
+            select: { courses: { select: { courseId: true } } }
+        });
+    
+        const isEnrolledInCourse = studentCourses?.courses.some(course => course.courseId === attendanceListCourseId?.courseId);
+    
+        if (isEnrolledInCourse) {
+            await prisma.attendanceListStudent.create({
+                data: {
+                    attendanceListId,
+                    studentId
+                }
+            });
+        }     
         await prisma.$disconnect();
     }
+    
 
     async getListRelationIds(attendanceListId: string, studentId: number): Promise<ListRelation[]> {
 
