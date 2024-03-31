@@ -24,7 +24,7 @@ export class UserService extends BaseService implements IUserService {
     }
 
     //this method returns a boolean - it should return a token for more security - also it should return more info for frontend use.
-    async loginUser(email:string, password:string): Promise<boolean> {
+    async loginUser(email:string, password:string): Promise<string> {
         const foundUser = await this.getByEmail(email);
         if(!foundUser){
             throw Error("no user")
@@ -33,7 +33,10 @@ export class UserService extends BaseService implements IUserService {
         if(!truePassword){
             throw Error("no pass")
         }
-        return true;
+        const userData = {
+            id:foundUser.id,
+        }
+        return userData.id;
     }
 
     async get(id: string): Promise<User> {

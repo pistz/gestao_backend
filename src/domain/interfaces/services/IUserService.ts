@@ -9,7 +9,7 @@ export interface IUserService {
 
     getAll():Promise<User[]>;
 
-    loginUser(email:string, password:string):Promise<boolean>
+    loginUser(email:string, password:string):Promise<string>
 
     createUser(user:createUserDTO):Promise<void>
 

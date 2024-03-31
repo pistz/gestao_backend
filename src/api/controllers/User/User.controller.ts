@@ -14,7 +14,8 @@ export class UserController {
         const password = request.body.password;
 
         try {
-            const logged = await userService.loginUser(email, password)
+            const userId = await userService.loginUser(email, password);
+            const logged = await userService.get(userId)
             response.json(logged);
         } catch (error) {
             response.status(401).json({ success: false, message: 'Invalid username or password' });

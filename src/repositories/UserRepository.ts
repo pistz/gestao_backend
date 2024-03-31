@@ -1,7 +1,6 @@
 import { createUserDTO } from "../domain/dto/Users/createUserDTO";
 import { updateUserDTO } from "../domain/dto/Users/updateUserDTO";
 import { User } from "../domain/entities/User.entity";
-import { Role, typeRole } from "../domain/entities/valueObjects/Role";
 import { IUserRepository } from "../domain/interfaces/repositories/IUserRepository";
 import { prisma } from "../utils/prismaClient/PrismaClient";
 
@@ -23,20 +22,35 @@ export class UserRepository implements IUserRepository {
         const result = await prisma.user.findUniqueOrThrow({
             where:{
                 id
-            }
+            },
+            include:{school:true}
         })
         await prisma.$disconnect();
-        return <User>{id:result.id, userFirstName:result.userFirstName, userLastName:result.userLastName, email:result.email, role:result.role};
+        return <User>{id:result.id, 
+            userFirstName:result.userFirstName, 
+            userLastName:result.userLastName, 
+            email:result.email, 
+            role:result.role, 
+            password:result.password,
+            school:result.school
+        };
     }
 
     async getByEmail(email: string): Promise<User> {
         const result = await prisma.user.findUniqueOrThrow({
             where:{
                 email
-            }
+            },
+            include:{school:true}
         })
+
         await prisma.$disconnect();
-        return <User>{id:result.id, userFirstName:result.userFirstName, userLastName:result.userLastName, email:result.email, role:result.role, password:result.password};
+        return <User>{id:result.id, 
+            userFirstName:result.userFirstName, 
+            userLastName:result.userLastName, 
+            email:result.email, 
+            password:result.password
+        };
     }
 
     async getAll(): Promise<User[]> {
