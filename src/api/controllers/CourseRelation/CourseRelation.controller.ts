@@ -37,8 +37,8 @@ export class CourseRelationToStudentController {
         const courseRelationRepository = new CourseRelationRepository();
         const courseRelationService = new CourseRelationService(courseRelationRepository);
 
-        const courseId:string = request.body.courseId;
-        const studentId:number = Number(request.body.studentId);
+        const courseId:any = request.query.courseId;
+        const studentId:number = Number(request.query.studentId);
 
         try {
             const courseRelation = await courseRelationService.getCourseRelationIds(courseId, studentId);
