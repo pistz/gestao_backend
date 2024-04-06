@@ -23,7 +23,7 @@ export class CourseRelationToStudentController {
         const courseRelationRepository = new CourseRelationRepository();
         const courseRelationService = new CourseRelationService(courseRelationRepository);
 
-        const courseRelationId = request.body.id;
+        const courseRelationId = request.params.id;
 
         try {
             await courseRelationService.deleteCourseRelation(courseRelationId);
@@ -61,5 +61,17 @@ export class CourseRelationToStudentController {
             response.status(500).json({ success: false, message: 'Internal Server Error' });
         }
 
+    }
+
+    async getAllCourseRelations(request:Request, response:Response){
+        const courseRelationRepository = new CourseRelationRepository();
+        const courseRelationService = new CourseRelationService(courseRelationRepository);
+
+        try {
+            const courseRelations = await courseRelationService.getAllCourseRelations();
+            response.json(courseRelations);
+        } catch (error) {
+            response.status(500).json({ success: false, message: 'Internal Server Error' });
+        }
     }
 }

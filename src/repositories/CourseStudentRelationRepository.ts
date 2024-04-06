@@ -40,4 +40,16 @@ export class CourseRelationRepository implements ICourseRelationRepository{
         await prisma.$disconnect();
     }
 
+    async getAllCourseRelations(): Promise<CourseRelation[]> {
+        const courseRelations = await prisma.courseStudent.findMany({
+            include:{
+                student:true,
+                course:true,
+            }
+        });
+        await prisma.$disconnect();
+        
+        return [...courseRelations] as CourseRelation[];
+    }
+
 }

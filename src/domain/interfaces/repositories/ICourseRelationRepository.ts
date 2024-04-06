@@ -5,4 +5,5 @@ export interface ICourseRelationRepository {
     getCourseRelationIds(courseId:string, studentId:number):Promise<CourseRelation[]>
     getCourseRelation(id:string):Promise<CourseRelation>
     deleteCourseRelation(id:string):Promise<void>
+    getAllCourseRelations():Promise<CourseRelation[]>;
 }

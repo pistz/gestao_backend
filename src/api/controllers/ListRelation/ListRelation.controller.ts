@@ -62,4 +62,16 @@ export class ListRelationController {
         }
 
     }
+
+    async getAllListRelations(request:Request, response:Response){
+        const listRelationRepository = new ListRelationRepository();
+        const listRelationService = new ListRelationService(listRelationRepository);
+
+        try {
+            const listRelation = await listRelationService.getAllListsRelations();
+            response.json(listRelation);
+        } catch (error) {
+            response.status(500).json({ success: false, message: 'Internal Server Error with List' });
+        }
+    }
 }

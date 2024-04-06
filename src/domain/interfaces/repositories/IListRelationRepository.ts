@@ -2,6 +2,7 @@ import { ListRelation } from "../../entities/ListRelation.entity";
 
 export interface IListRelationRepository {
 
+    getAllListsRelations(): Promise<ListRelation[]> ;
     getListRelationIds(attendanceListId:string, studentId:number):Promise<ListRelation[]>
     getListRelation(id:string):Promise<ListRelation>
     createListRelation(attendanceListId:string, studentId:number):Promise<void>

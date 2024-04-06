@@ -32,18 +32,12 @@ export class AttendanceListRepository implements IAttendanceListRepository{
     async getAllLists(): Promise<AttendanceList[]> {
         const listsData = await prisma.attendanceList.findMany({
             include:{
-                students:true
+                students:true,
+                Course:true
             }
         });
-
-        const lists:AttendanceList[] = listsData.map(listData =>({
-            id: listData.id,
-            attendanceDate: listData.attendanceDate,
-            courseId: listData.courseId,
-            students: listData.students,
-        })) 
         await prisma.$disconnect();
-        return lists;
+        return [...listsData] as AttendanceList[];
     }
 
 }

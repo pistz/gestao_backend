@@ -63,6 +63,17 @@ export class ListRelationRepository implements IListRelationRepository{
         return relations;
     }
 
+    async getAllListsRelations(): Promise<ListRelation[]> {
+        const listRelation = await prisma.attendanceListStudent.findMany({
+            include:{
+                attendanceList:true,
+                student:true,
+            }
+        })
+        await prisma.$disconnect();
+        return [...listRelation] as ListRelation[];
+    }
+
 
 
 }

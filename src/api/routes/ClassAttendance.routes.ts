@@ -19,3 +19,7 @@ classAttendanceRouter
 classAttendanceRouter
     .route('/api/v1/attendId')
     .get(listRelationController.getListRelationIds);
+
+    classAttendanceRouter
+    .route('/api/v1/listRelation')
+    .get(listRelationController.getAllListRelations);

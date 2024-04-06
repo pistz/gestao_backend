@@ -11,6 +11,10 @@ export class CourseRelationService extends BaseService implements ICourseRelatio
         super();
         this.courseRelationRepository = courseRelationRepository;
     }
+    async getAllCourseRelations(): Promise<CourseRelation[]> {
+        const courseRelations = await this.courseRelationRepository.getAllCourseRelations();
+        return courseRelations;
+    }
 
     async createCourseRelation(courseId: string, studentId: number): Promise<void> {
         await this.courseRelationRepository.createCourseRelation(courseId, studentId);
