@@ -13,5 +13,6 @@ attendanceListRouter
 
 attendanceListRouter
     .route('/api/v1/lists/:id')
-    .get(attendanceListController.getAttendanceList);
+    .get(attendanceListController.getAttendanceList)
+    .delete(attendanceListController.deleteAttendanceList);
 

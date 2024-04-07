@@ -42,12 +42,14 @@ model Student {
 // Definição da tabela 'ListaPresenca'
 model AttendanceList {
   id             String                  @id @default(uuid())
-  attendanceDate String                  @unique
+  attendanceDate String
   createdAt      DateTime                @default(now())
   modifiedAt     DateTime                @updatedAt
   Course         Course                  @relation(fields: [courseId], references: [id])
   courseId       String
   students       AttendanceListStudent[] // Relacionamento muitos-para-muitos com alunos através da tabela de junção AttendanceListStudent
+
+  @@unique([attendanceDate, courseId])
 }
 
 model CourseStudent {

@@ -5,6 +5,15 @@ import { prisma } from "../utils/prismaClient/PrismaClient";
 
 export class AttendanceListRepository implements IAttendanceListRepository{
 
+    async deleteList(id: string): Promise<void> {
+        await prisma.attendanceList.delete({
+            where:{
+                id
+            }
+        });
+        await prisma.$disconnect();
+    }
+
     async createList(list: createListDTO): Promise<void> {
         await prisma.attendanceList.create({
             data:{

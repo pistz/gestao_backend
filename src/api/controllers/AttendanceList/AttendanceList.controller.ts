@@ -45,4 +45,18 @@ export class AttendanceListController {
         }
     }
 
+    async deleteAttendanceList(request:Request, response:Response){
+        const attendanceListRepository = new AttendanceListRepository();
+        const attendanceListService = new AttendanceListService(attendanceListRepository);
+
+        const listId = request.params.id;
+
+        try {
+            await attendanceListService.deleteList(listId);
+            response.json({success: true, message: 'List Deleted'});
+        } catch (error) {
+            response.status(500).json({ success: false, message: 'Internal Server Error' });
+        }
+    }
+
 }

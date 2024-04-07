@@ -14,6 +14,7 @@ export class AttendanceListService extends BaseService implements IAttendanceLis
         this.attendanceListRepository = attendanceListRepository;
     }
 
+
     async createList(list: createListDTO): Promise<void> {
         const validator = new CreateAttendanceListValidation();
         const result = validator.validate(list);
@@ -28,6 +29,10 @@ export class AttendanceListService extends BaseService implements IAttendanceLis
 
     async getAllLists(): Promise<AttendanceList[]> {
         return await this.attendanceListRepository.getAllLists();
+    }
+
+    async deleteList(id: string): Promise<void> {
+        return await this.attendanceListRepository.deleteList(id);
     }
 
 }

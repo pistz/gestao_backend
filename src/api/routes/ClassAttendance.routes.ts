@@ -10,7 +10,6 @@ classAttendanceRouter
     .route('/api/v1/attend')
     .post(listRelationController.attendToClass)
     .get(listRelationController.studentsAttendingToClass)
-    
 
 classAttendanceRouter
     .route('/api/v1/attend/:id')
@@ -20,6 +19,6 @@ classAttendanceRouter
     .route('/api/v1/attendId')
     .get(listRelationController.getListRelationIds);
 
-    classAttendanceRouter
+classAttendanceRouter
     .route('/api/v1/listRelation')
     .get(listRelationController.getAllListRelations);

@@ -8,4 +8,6 @@ export interface IAttendanceListRepository{
     getList(id:string):Promise<AttendanceList>
 
     getAllLists():Promise<AttendanceList[]>
+
+    deleteList(id:string):Promise<void>
 }
