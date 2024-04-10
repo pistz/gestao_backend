@@ -68,6 +68,7 @@ model AttendanceListStudent {
   studentId        Int
   attendanceList   AttendanceList @relation(fields: [attendanceListId], references: [id])
   attendanceListId String
+  createdAt        DateTime       @default(now())
 
   @@unique([studentId, attendanceListId])
 }
