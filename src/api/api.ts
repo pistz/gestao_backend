@@ -8,7 +8,9 @@ import { attendanceListRouter } from './routes/AttendanceLists.routes';
 import { enrollmentRouter } from './routes/CourseEnrollment.routes';
 import { classAttendanceRouter } from './routes/ClassAttendance.routes';
 
-const allowedOrigins = ['http://localhost:5173'];
+const serverHost:string = String(process.env.FRONT_END_HOST);
+
+const allowedOrigins = ['http://localhost:5173', serverHost];
 
 const app = express();
 app.use(express.json()); // For parsing application/json
